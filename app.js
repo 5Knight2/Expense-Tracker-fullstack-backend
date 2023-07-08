@@ -38,6 +38,9 @@ app.use(expense_route)
 app.use(order_route);
 app.use(premium_route);
 app.use(password_route);
+app.use((req,res)=>{
+    res.sendFile(path.join(__dirname,'public/',req.url))
+})
 
 
 User.hasMany(Expense);

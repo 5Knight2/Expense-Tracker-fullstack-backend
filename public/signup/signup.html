@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand" style="background-color:rgb(102, 144, 185);">
+
+<div class="container"  >
+<div class="navbar-brand">Expense Tracker</div>
+<ul class="navbar-nav">
+    <li class="nav-item"><a href="http://16.170.241.191:3000/signin/signin.html" class="nav-link">Sign-in</a></li>
+    <li class="nav-item"><a href="http://16.170.241.191:3000/signup/signup.html" class="nav-link">signup</a></li>
+</ul>
+</div>
+    </nav>
+
+   
+    
+    
+    <div class="container"  >
+        <h4 style="color: gray;">Sign-up</h4>
+        <form id="form" novalidate >
+            
+          <label for="full_Name">Full Name:</label>
+          <input type="text" class="form-control " id="full_Name" style="max-width: 300px;" required>
+          
+          <label for="email">Email:</label>
+          <input type="email" class="form-control" id="email" style="max-width: 300px;" required>
+          
+          <label for="password">Password:</label>
+          <input type="password" class="form-control" id="password" style="max-width: 300px;" required>
+<br>
+          <input type="submit" class="btn btn-secondary">
+        </form>
+    </div>
+    <div class="container">
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+    <script src="signup.js"></script>
+</body>
+
+</html>
