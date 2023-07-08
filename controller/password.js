@@ -22,7 +22,7 @@ exports.reset_link=async(req,res,next)=>{
     user=await User.findOne({where:{email:req.body.email}})
     const row=await user.createForgotPasswordRequest({id:uuidv4()});
     
-    const url='http://localhost:5000/password/resetpassword/'+row.id;
+    const url='http://16.170.241.191:5000/password/resetpassword/'+row.id;
 
     await tranEmailApi.sendTransacEmail({sender,to:receiver,subject:'Reset passwords',textContent:url})
     res.json({message:'email sent'});
