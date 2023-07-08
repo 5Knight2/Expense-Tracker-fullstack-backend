@@ -3,6 +3,7 @@ const User=require('../model/user');
 
 exports.authenticate=(req,res,next)=>{
     try{
+        console.log('hii')
         const userobj=jwt.verify(req.headers.authorization,'secretKey');
         
         User.findByPk(userobj.userid)
@@ -12,5 +13,5 @@ exports.authenticate=(req,res,next)=>{
         })
     }
     catch(err){console.log(err) 
-        return res.status(401).end()}
+        return res.status(401).json({message:'user is not authorized'})}
 }
