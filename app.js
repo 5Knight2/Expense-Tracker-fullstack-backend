@@ -25,10 +25,10 @@ console.log(process.env.SQL_PASSWORD)
 
 const logger=fs.createWriteStream(path.join(__dirname,'access.log'),{flags:'a'});
 const app=express();
-app.use(helmet());
+
 app.use(compression());
 app.use(morgan('combined',{stream:logger}));
-app.use(bodyparser.urlencoded());
+app.use(bodyparser.urlencoded({extended:true}));
 app.use(bodyparser.json());
 app.use(cors())
 
@@ -59,5 +59,5 @@ sequelize
     console.log('connected');
     console.log(process.env.SQL_PROJECT);
     
-    app.listen(process.env.PORT||5000)})
+    app.listen(process.env.PORT||3000)})
 .catch((err)=>{console.log(err)})
