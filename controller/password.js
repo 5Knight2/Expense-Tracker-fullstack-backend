@@ -4,6 +4,7 @@ const Reset=require('../model/reset');
 const {v4 : uuidv4} = require('uuid');
 const { UUIDV4 } = require('sequelize');
 const bcrypt=require('bcrypt')
+const sequelize=require('../util/database')
 
 exports.reset_link=async(req,res,next)=>{
     const t=await sequelize.transaction();
