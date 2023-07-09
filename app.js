@@ -5,7 +5,7 @@ const bodyparser=require('body-parser');
 const cors=require('cors');
 const helmet=require('helmet')
 const compression=require('compression')
-const morgan=require('morgan')
+// const morgan=require('morgan')
 const dotenv=require('dotenv').config();
 
 const user_route=require('./router/user');
@@ -23,11 +23,11 @@ const File_Url=require('./model/file_url');
 
 console.log(process.env.SQL_PASSWORD)
 
-const logger=fs.createWriteStream(path.join(__dirname,'access.log'),{flags:'a'});
+// const logger=fs.createWriteStream(path.join(__dirname,'access.log'),{flags:'a'});
 const app=express();
 
 app.use(compression());
-app.use(morgan('combined',{stream:logger}));
+// app.use(morgan('combined',{stream:logger}));
 app.use(bodyparser.urlencoded({extended:true}));
 app.use(bodyparser.json());
 app.use(cors())
