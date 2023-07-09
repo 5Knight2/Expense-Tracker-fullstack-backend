@@ -31,11 +31,10 @@ async function reset(e){e.preventDefault();
     try{
     const msg=await axios.post(baseurl+'password/forgotpassword',obj)
     alert(msg.data.message)
-
-        window.location.href = "http://16.170.218.203:3000/expense/expense.html";
+if(msg.data.message=='email sent')window.location.href = "http://16.170.218.203:3000/signin/signin.html";
     }
     catch(err){
-        console.log(err.response.data);alert(err.response.data)}
+        alert('something went wrong try again later')}
     }else form_reset.classList.add('was-validated')}
 
 

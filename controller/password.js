@@ -6,8 +6,12 @@ const { UUIDV4 } = require('sequelize');
 const bcrypt=require('bcrypt')
 
 exports.reset_link=async(req,res,next)=>{
+    const t=await sequelize.transaction();
     try{
-        const api=process.env.SENDINBLUE_API;
+    
+        user=await User.findOne({where:{email:req.body.email}})
+        if(!user){res.json({message:'User with this email is not available'})}
+    const api=process.env.SENDINBLUE_API;
     const defaultClient=Sib.ApiClient.instance;
     const apiKey=defaultClient.authentications['api-key']
     apiKey.apiKey=process.env.SENDINBLUE_API;
@@ -19,16 +23,19 @@ exports.reset_link=async(req,res,next)=>{
 
     //Create record in reset table
 
-    user=await User.findOne({where:{email:req.body.email}})
-    const row=await user.createForgotPasswordRequest({id:uuidv4()});
+   
+    const row=await user.createForgotPasswordRequest({id:uuidv4()},{transaction:t});
     
     const url='http://16.170.218.203:3000/password/resetpassword/'+row.id;
 
     await tranEmailApi.sendTransacEmail({sender,to:receiver,subject:'Reset passwords',textContent:url})
+    await t.commit()
     res.json({message:'email sent'});
     console.log('done')
     }
-    catch(err){console.log(err)}
+    catch(err){res.status(401).end()
+        await t.rollback();
+        console.log(err)}
 
 }
 

@@ -15,7 +15,7 @@ exports.signup=async(req,res,next)=>{
         if(err.name=='SequelizeUniqueConstraintError' && err.fields.email== obj.email){
          res.status(403).send("Email already registered");
  
-        }else res.json(err);
+        }else res.json({message:'something went wrong.Try again later'});
  }
 })}
 
