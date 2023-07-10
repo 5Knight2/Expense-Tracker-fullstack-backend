@@ -14,7 +14,7 @@ rowsperpage.value=localStorage.getItem('rows');
 
 let page=0;
 
-const baseurl="http://13.49.240.151:3000/"
+const baseurl="http://13.49.240.151/"
 
 form.addEventListener('submit',add);
 ul.addEventListener('click',remove);
@@ -34,7 +34,7 @@ function logout(){
     localStorage.setItem("token",0)
     localStorage.setItem("row",10)
     alert('Log Out')
-    location.replace('http://13.49.240.151:3000/signin/signin.html')
+    location.replace('http://13.49.240.151/signin/signin.html')
 }
 
 function change_rowcount(e){

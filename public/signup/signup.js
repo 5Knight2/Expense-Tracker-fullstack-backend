@@ -1,5 +1,5 @@
 const form=document.querySelector('#form');
-const baseurl="http://13.49.240.151:3000/"
+const baseurl="http://13.49.240.151/"
 
 form.addEventListener('submit',add);
 
@@ -20,7 +20,7 @@ const response=await axios.post(baseurl+"user/signup",obj)
 
 if(response.status===201){
     console.log('Signup done');
-    window.location.href = 'http://13.49.240.151:3000/signin/signin.html';}
+    window.location.href = 'http://13.49.240.151/signin/signin.html';}
 
     else{
         throw new Error("Failed to sign-up")

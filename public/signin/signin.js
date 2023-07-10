@@ -2,7 +2,7 @@ const login=document.querySelector('#login_btn');
 const forgot_password=document.querySelector('#forgot_password');
 const form=document.querySelector('#form2');
 const form_reset=document.querySelector('#form3');
-const baseurl="http://13.49.240.151:3000/"
+const baseurl="http://13.49.240.151/"
 
 
 
@@ -31,7 +31,7 @@ async function reset(e){e.preventDefault();
     try{
     const msg=await axios.post(baseurl+'password/forgotpassword',obj)
     alert(msg.data.message)
-if(msg.data.message=='email sent')window.location.href = "http://13.49.240.151:3000/signin/signin.html";
+if(msg.data.message=='email sent')window.location.href = "http://13.49.240.151/signin/signin.html";
     }
     catch(err){
         alert('something went wrong try again later')}
@@ -49,7 +49,7 @@ async function signin(e){
     const msg=await axios.post(baseurl+'user/login',obj)
     alert(msg.data.message)
     localStorage.setItem("token", msg.data.token);
-        window.location.href = "http://13.49.240.151:3000/expense/expense.html";
+        window.location.href = "http://13.49.240.151/expense/expense.html";
     }
     catch(err){
         console.log(err.response.data);alert(err.response.data)}
