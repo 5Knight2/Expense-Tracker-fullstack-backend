@@ -16,7 +16,7 @@ try{
         if(err){console.log(err)
         throw new Error(JSON.stringify.err)}
         
-        await req.user.createOrder({
+        await req.user.createOrer({
             orderId:order.id,
             paymentstatus:'PENDING'
         },{transaction:t})
