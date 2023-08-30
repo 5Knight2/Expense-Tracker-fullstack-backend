@@ -6,12 +6,12 @@ exports.authenticate=(req,res,next)=>{
         
         const userobj=jwt.verify(req.headers.authorization,'secretKey');
         
-        User.findByPk(userobj.userid)
+        User.findById(userobj.userid)
         .then((user)=>{
             req.user=user
             next();
         })
     }
     catch(err){console.log(err) 
-        return res.status(401).json({message:'user is not authorized'})}
+        return res.status(401).json({message:'user is not authorized!! Login again'})}
 }

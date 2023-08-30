@@ -27,7 +27,7 @@ exports.reset_link=async(req,res,next)=>{
    
     const row=await user.createForgotPasswordRequest({id:uuidv4()},{transaction:t});
     
-    const url='http://13.49.240.151/password/resetpassword/'+row.id;
+    const url='http://localhost:3000/password/resetpassword/'+row.id;
 
     await tranEmailApi.sendTransacEmail({sender,to:receiver,subject:'Reset passwords',textContent:url})
     await t.commit()

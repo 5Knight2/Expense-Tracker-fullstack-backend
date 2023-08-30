@@ -1,5 +1,5 @@
 const User=require('../model/user')
-const Expense=require('../model/expense')
+//const Expense=require('../model/expense')
 const bcrypt=require('bcrypt')
 const jwt=require('jsonwebtoken')
 
@@ -9,23 +9,20 @@ exports.signup=async(req,res,next)=>{
     bcrypt.hash(obj.password,10,async(err,hash)=>{
         
         try{
-        const result= await User.create({name:obj.fullname,email:obj.email,password:hash})
+        const user= new User({name:obj.fullname,email:obj.email,password:hash,totalCost:0,isPremiumUser:false})
+        await user.save()
         res.status(201).end()}
         catch(err){console.log(err)
-        if(err.name=='SequelizeUniqueConstraintError' && err.fields.email== obj.email){
+        if(err.code==11000){
          res.status(403).send("Email already registered");
  
-        }else res.json({message:'something went wrong.Try again later'});
+        }else res.status(403).send('something went wrong.Try again later');
  }
 })}
 
 exports.login=(req,res,next)=>{
-    User.findOne({
-        
-        where: {
-            email:req.body.email,
-        },
-    })
+    User.findOne(
+         {email:req.body.email})
     .then(result=>{
         if(result===null)return res.status(404).send('User not found')
         bcrypt.compare(req.body.password,result.password,(err,same)=>{

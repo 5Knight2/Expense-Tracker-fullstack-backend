@@ -14,7 +14,7 @@ rowsperpage.value=localStorage.getItem('rows');
 
 let page=0;
 
-const baseurl="http://13.49.240.151/"
+const baseurl="http://localhost:3000/"
 
 form.addEventListener('submit',add);
 ul.addEventListener('click',remove);
@@ -34,7 +34,7 @@ function logout(){
     localStorage.setItem("token",0)
     localStorage.setItem("row",10)
     alert('Log Out')
-    location.replace('http://13.49.240.151/signin/signin.html')
+    location.replace('http://localhost:3000/signin/signin.html')
 }
 
 function change_rowcount(e){
@@ -270,8 +270,8 @@ if(!rows){rows=10;localStorage.setItem(rows,10)}
     page++;
     const ul=document.querySelector('#ul')
     while(ul.firstChild)ul.removeChild(ul.firstChild)
-        for(let i=0;i<result.data.rows.length;i++){
-            show(result.data.rows[i])
+        for(let i=0;i<result.data.length;i++){
+            show(result.data[i])
         }
         next.disabled=true;prev.disabled=true;
         if(result.data.count-rows*page>0){next.disabled=false;}
@@ -285,7 +285,7 @@ function show(obj){
     const str=obj.amount+' - '+obj.description+' - '+obj.type;
     const ul=document.querySelector('#ul')
     const li=document.createElement('li');
-    li.id=obj.id;
+    li.id=obj._id;
     const amt=document.createElement('input');
     amt.type='number';
     amt.value=obj.amount;
