@@ -3,7 +3,6 @@ const Expense=require('../model/expense')
 const File_Url=require('../model/file_url')
 const bcrypt=require('bcrypt')
 const jwt=require('jsonwebtoken')
-const sequelize=require('../util/database')
 const Download=require('../services/download')
 const aws=require('aws-sdk')
 const { UpdateAttribute } = require('sib-api-v3-sdk')
@@ -17,14 +16,19 @@ res.status(200).json(history);
 
 exports.download=async(req,res,next)=>{
     try{
-        let expense=await req.user.getExpenses()
+        let expense=await Expense.find({   
+            userId:req.user.id
+        })
         expense=JSON.stringify(expense);
  
-        const FILE_NAME='expense_for_'+req.user.email+new Date()+'.txt';
+        // const FILE_NAME='expense_for_'+req.user.email+new Date()+'.txt';
 
-        const URL= await update(expense,FILE_NAME);
+        // const URL= await update(expense,FILE_NAME);
 
-        await req.user.createFileurl({url:URL});
+        const URL='https://www.google.com';
+
+        const file=new File_Url({userId:req.user,url:URL});
+        file.save();
         
         res.status(200).json({file_Url:URL})
 

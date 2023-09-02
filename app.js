@@ -11,9 +11,9 @@ const dotenv=require('dotenv').config();
 
  const user_route=require('./router/user');
  const expense_route=require('./router/expense');
-// const order_route=require('./router/order');
-// const premium_route=require('./router/premium');
-// const password_route=require('./router/password');
+ const order_route=require('./router/order');
+ const premium_route=require('./router/premium');
+ const password_route=require('./router/password');
 
 
 
@@ -31,9 +31,9 @@ app.use(cors())
 
  app.use(user_route);
  app.use(expense_route)
-// app.use(order_route);
-// app.use(premium_route);
-// app.use(password_route);
+ app.use(order_route);
+ app.use(premium_route);
+ app.use(password_route);
  app.use((req,res)=>{
     res.sendFile(path.join(__dirname,'public/',req.url))
 })

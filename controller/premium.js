@@ -6,13 +6,10 @@ const Sequelize  = require('sequelize')
 const sequelize=require('../util/database')
 
 exports.get_All_Expenses=async (req,res,next)=>{
-    try{
-        const result=await User.findAll({
-            attributes:['name','totalCost'],
-            order:[['totalCost','DESC']]
-        })
+   if(req.user.isPremiumUser==true){ try{
+    const result=await User.find().select('name totalCost').sort({totalCost: -1})
 
-        return res.send(result)}
+    return res.send(result)}
     catch(err){console.log(err)}
    
-}
+}else {res.status(401).send('You are not a premium user')}}
