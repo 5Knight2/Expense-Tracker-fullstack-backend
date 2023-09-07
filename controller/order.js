@@ -7,8 +7,8 @@ const sequelize=require('../util/database')
 exports.buy=async (req,res,next)=>{
 try{
     const rzp=new Razorpay({
-        key_id:'rzp_test_kjeoDE64gS2ezE',
-        key_secret:'o5xewZlrc39u94eY4lfBX2Vq'
+        key_id:process.env.RAZORPAY_KEY,
+        key_secret:process.env.RAZORPAY_SECRET
     })
     const amount=2000000;
     rzp.orders.create({amount,currency:'INR'},async (err,order)=>{

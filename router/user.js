@@ -1,11 +1,11 @@
 const express=require('express');
-const signup_Controller=require('../controller/user')
+const signupController=require('../controller/user')
 
 
 const router=express.Router();
 
-router.post('/user/signup',signup_Controller.signup);
+router.post('/user/signup',signupController.signup);
 
-router.post('/user/login',signup_Controller.login);
+router.post('/user/login',signupController.login);
 
 module.exports=router;

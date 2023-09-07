@@ -1,17 +1,17 @@
 const express=require('express')
-const expense_controller=require('../controller/expense')
+const expenseController=require('../controller/expense')
 
-const authentication_middleware=require('../middleware/auth')
+const authenticationMiddleware=require('../middleware/auth')
 const router=express.Router();
 
-router.get('/expense',authentication_middleware.authenticate,expense_controller.get_All_Expenses);
+router.get('/expense',authenticationMiddleware.authenticate,expenseController.getAllExpenses);
 
-router.post('/expense',authentication_middleware.authenticate,expense_controller.post_Expense);
+router.post('/expense',authenticationMiddleware.authenticate,expenseController.postExpense);
 
-router.get('/delete/:id',authentication_middleware.authenticate,expense_controller.delete);
+router.delete('/expense/:id',authenticationMiddleware.authenticate,expenseController.delete);
 
-router.get('/download',authentication_middleware.authenticate,expense_controller.download);
+router.get('/expense/download',authenticationMiddleware.authenticate,expenseController.download);
 
-router.get('/download_history',authentication_middleware.authenticate,expense_controller.download_history);
+router.get('/expense/downloadHistory',authenticationMiddleware.authenticate,expenseController.downloadHistory);
 
 module.exports=router;

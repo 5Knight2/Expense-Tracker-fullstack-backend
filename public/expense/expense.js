@@ -89,7 +89,7 @@ async function show_download_history(e){
         if(parseJwt(localStorage.getItem('token'))){
         const token=localStorage.getItem('token');
         try{
-        const response=await axios.get(baseurl+'download_history',{headers:{Authorization:token}})
+        const response=await axios.get(baseurl+'expense/downloadHistory',{headers:{Authorization:token}})
 
         ul2=document.createElement('ul')
     for(let i=0;i<response.data.length;i++){
@@ -123,7 +123,7 @@ async function download_data(e){
 
     if(parseJwt(localStorage.getItem('token'))){
     const token=localStorage.getItem('token');
-    try{const result=await axios.get(baseurl+'download',{headers:{Authorization:token}})
+    try{const result=await axios.get(baseurl+'expense/download',{headers:{Authorization:token}})
     console.log(result);
     location.replace(result.data.file_Url);}
     catch(err){
@@ -216,12 +216,12 @@ async function buy(e){
     e.preventDefault();
     try {
         const token=localStorage.getItem('token')
-        const result=await axios.get(baseurl+'buy',{headers:{Authorization:token}});
+        const result=await axios.get(baseurl+'order/buy',{headers:{Authorization:token}});
     var options={
         'key':result.data.key_id,
         'order_id':result.data.id,
         'handler':async function(response){
-            axios.post(baseurl+'changeStatus',{order_id:response.razorpay_order_id,payment_id:response.razorpay_payment_id},{headers:{Authorization:localStorage.getItem('token')}})
+            axios.post(baseurl+'order/changeStatus',{order_id:response.razorpay_order_id,payment_id:response.razorpay_payment_id},{headers:{Authorization:localStorage.getItem('token')}})
             .then((res)=>{alert(res.data.message)
                 localStorage.setItem("token",res.data.token);
                 location.reload();
@@ -232,7 +232,7 @@ async function buy(e){
     e.preventDefault();
 
     rzp1.on('payment.failed',function (response){
-        axios.post(baseurl+'changeStatus',{order_id:options.order_id},{headers:{Authorization:localStorage.getItem('token')}})
+        axios.post(baseurl+'order/changeStatus',{order_id:options.order_id},{headers:{Authorization:localStorage.getItem('token')}})
         .then(()=>{alert('payment failed')})
     })
 
@@ -322,7 +322,7 @@ function remove(e){
     
     if(e.target.classList.contains('delete')){
         const token=localStorage.getItem('token');
-        axios.get(baseurl+'delete/'+e.target.parentElement.id,{headers:{Authorization:token}})
+        axios.delete(baseurl+'expense/'+e.target.parentElement.id,{headers:{Authorization:token}})
         .then(()=>{  ul.removeChild(e.target.parentElement);})
         .catch(err=>{console.log(err)})
       

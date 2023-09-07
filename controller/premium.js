@@ -5,7 +5,7 @@ const jwt=require('jsonwebtoken')
 const Sequelize  = require('sequelize')
 const sequelize=require('../util/database')
 
-exports.get_All_Expenses=async (req,res,next)=>{
+exports.getAllExpenses=async (req,res,next)=>{
    if(req.user.isPremiumUser==true){ try{
     const result=await User.find().select('name totalCost').sort({totalCost: -1})
 

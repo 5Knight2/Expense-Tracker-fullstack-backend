@@ -1,9 +1,9 @@
 const express=require('express')
-const order_controller=require('../controller/order')
+const orderController=require('../controller/order')
 const authorization=require('../middleware/auth')
 
 
 const router=express.Router();
-router.get('/buy',authorization.authenticate,order_controller.buy);
-router.post('/changeStatus',authorization.authenticate,order_controller.changeStatus);
+router.get('/order/buy',authorization.authenticate,orderController.buy);
+router.post('/order/changeStatus',authorization.authenticate,orderController.changeStatus);
 module.exports=router;

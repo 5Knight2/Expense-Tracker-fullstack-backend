@@ -1,14 +1,14 @@
 const User=require('../model/user')
 const Expense=require('../model/expense')
-const File_Url=require('../model/file_url')
+const FileUrl=require('../model/file_url')
 const bcrypt=require('bcrypt')
 const jwt=require('jsonwebtoken')
 const Download=require('../services/download')
 const aws=require('aws-sdk')
 const { UpdateAttribute } = require('sib-api-v3-sdk')
 
-exports.download_history=async(req,res,next)=>{
-    try { const history=await Download.download_history(req)
+exports.downloadHistory=async(req,res,next)=>{
+    try { const history=await Download.downloadHistory(req)
 res.status(200).json(history);
     }catch(err){console.log(err)
     res.status(400).end()}
@@ -27,7 +27,7 @@ exports.download=async(req,res,next)=>{
 
         const URL='https://www.google.com';
 
-        const file=new File_Url({userId:req.user,url:URL});
+        const file=new FileUrl({userId:req.user,url:URL});
         file.save();
         
         res.status(200).json({file_Url:URL})
@@ -39,7 +39,7 @@ exports.download=async(req,res,next)=>{
 
 }
 
-exports.get_All_Expenses=(req,res,next)=>{
+exports.getAllExpenses=(req,res,next)=>{
   
     if(req.query.page!=null || req.query.page!=undefined){
     const limit=Number(req.query.rows);
@@ -59,7 +59,7 @@ Expense.find({userId:req.user.id})
    
 }
 
-exports.post_Expense = async (req, res, next) => {
+exports.postExpense = async (req, res, next) => {
     
     try {
 

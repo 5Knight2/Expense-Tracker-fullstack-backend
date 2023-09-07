@@ -38,7 +38,7 @@ app.use(cors())
     res.sendFile(path.join(__dirname,'public/',req.url))
 })
 
-mongoose.connect('mongodb+srv://root:Password123@cluster0.dn8re5y.mongodb.net/expense?retryWrites=true&w=majority').then(res=>{
+mongoose.connect(process.env.MONGOOSE_CONNECTION_STRING).then(res=>{
     app.listen(3000);
     console.log('connected');
 })
